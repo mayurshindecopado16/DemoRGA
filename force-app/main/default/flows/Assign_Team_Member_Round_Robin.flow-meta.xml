@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>67.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <description>Save the selected team member and update Round Robin tracking fields.</description>
+        <name>Assign_Team_Member</name>
+        <label>Assign Team Member</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>varAssignedUserId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Loop_Team_Members.User__c</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varUserAssigned</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Loop_Team_Members.Last_Assigned__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Flow.CurrentDateTime</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Loop_Team_Members.Assignment_Count__c</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <numberValue>1.0</numberValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Update_Release_Team_Member</targetReference>
+        </connector>
+    </assignments>
+    <decisions>
+        <description>Check whether a team member has already been selected for assignment.</description>
+        <name>First_Member_Available</name>
+        <label>First Member Available?</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Loop_Team_Members</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Skip Member</defaultConnectorLabel>
+        <rules>
+            <name>Assign_First_Member</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>varUserAssigned</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_Team_Member</targetReference>
+            </connector>
+            <label>Assign First Member</label>
+        </rules>
+    </decisions>
+    <description>Returns the next available active user for a requested team role using round-robin assignment.</description>
+    <environments>Default</environments>
+    <interviewLabel>Assign Team Member (Round Robin) {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Assign Team Member (Round Robin)</label>
+    <loops>
+        <name>Loop_Team_Members</name>
+        <label>Loop Team Members</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <collectionReference>Get_Active_Team_Members</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>First_Member_Available</targetReference>
+        </nextValueConnector>
+    </loops>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <description>Fetch the Active Users</description>
+        <name>Get_Active_Team_Members</name>
+        <label>Get Active Team Members</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Loop_Team_Members</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Team_Role__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>varRequiredRole</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Active__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>Release_Team__c</object>
+        <sortField>Last_Assigned__c</sortField>
+        <sortOrder>Asc</sortOrder>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <description>Save the updated Round Robin information for the selected team member.</description>
+        <name>Update_Release_Team_Member</name>
+        <label>Update Release Team Member</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Loop_Team_Members</targetReference>
+        </connector>
+        <inputReference>Loop_Team_Members</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Get_Active_Team_Members</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <variables>
+        <description>This Variable used for Assigned User Id.</description>
+        <name>varAssignedUserId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+    <variables>
+        <description>This Variable used for user Role.</description>
+        <name>varRequiredRole</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>This variable indicates whether a team member has already been selected.</description>
+        <name>varUserAssigned</name>
+        <dataType>Boolean</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <booleanValue>false</booleanValue>
+        </value>
+    </variables>
+</Flow>

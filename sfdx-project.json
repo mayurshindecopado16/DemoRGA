@@ -1,0 +1,70 @@
+{
+  "packageDirectories": [
+    {
+      "versionName": "ver 0.1",
+      "versionNumber": "0.1.0.NEXT",
+      "path": "force-app",
+      "default": true,
+      "package": "Release Governance App Demo",
+      "versionDescription": ""
+    },
+    {
+      "versionName": "ver 0.1",
+      "versionNumber": "0.1.0.NEXT",
+      "path": "force-app",
+      "default": false,
+      "package": "Release Governance App DemoV1",
+      "versionDescription": ""
+    },
+    {
+      "versionName": "ver 0.1",
+      "versionNumber": "0.1.0.NEXT",
+      "path": "force-app",
+      "default": false,
+      "package": "Release Governance App DemoV2",
+      "versionDescription": ""
+    },
+    {
+      "versionName": "ver 0.1",
+      "versionNumber": "0.1.0.NEXT",
+      "path": "force-app",
+      "default": false,
+      "package": "Release Governance App DemoV3",
+      "versionDescription": ""
+    },
+    {
+      "versionName": "ver 0.1",
+      "versionNumber": "0.1.0.NEXT",
+      "path": "force-app",
+      "default": false,
+      "package": "Release Governance App DemoV4",
+      "versionDescription": ""
+    },
+    {
+      "versionName": "ver 0.1",
+      "versionNumber": "0.1.0.NEXT",
+      "path": "force-app",
+      "default": false,
+      "package": "Release Governance App DemoV5",
+      "versionDescription": ""
+    }
+  ],
+  "name": "DemoRGA",
+  "namespace": "Demorga",
+  "sfdcLoginUrl": "https://login.salesforce.com",
+  "sourceApiVersion": "67.0",
+  "packageAliases": {
+    "Release Governance App Demo": "0HogK00000046y5SAA",
+    "Release Governance App Demo@0.1.0-1": "04tgK000000GQ8DQAW",
+    "Release Governance App DemoV1": "0HogK00000046zhSAA",
+    "Release Governance App DemoV1@0.1.0-1": "04tgK000000GR2fQAG",
+    "Release Governance App DemoV2": "0HogK000000471JSAQ",
+    "Release Governance App DemoV2@0.1.0-1": "04tgK000000GSQ9QAO",
+    "Release Governance App DemoV3": "0HogK00000047XZSAY",
+    "Release Governance App DemoV4": "0HogK00000047ZBSAY",
+    "Release Governance App DemoV4@0.1.0-1": "04tgK000000GePhQAK",
+    "Release Governance App DemoV4@0.1.0-2": "04tgK000000GfNNQA0",
+    "Release Governance App DemoV5": "0HogK0000004CPBSA2",
+    "Release Governance App DemoV5@0.1.0-1": "04tgK000000HbzFQAS"
+  }
+}

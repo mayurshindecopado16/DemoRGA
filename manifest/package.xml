@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    
+    <!-- ========================= -->
+    <!-- Lightning Application -->
+    <!-- ========================= -->
+    <types>
+        <members>Release_Governance_App</members>
+        <name>CustomApplication</name>
+    </types>
+    <!-- ========================= -->
+    <!-- Custom Objects -->
+    <!-- ========================= -->
+      <types>
+        <members>Approval_Request__c</members>
+        <members>Deployment_Audit__c</members>
+        <members>Deployment_Request__c</members>
+        <members>Deployment_Task__c</members>
+        <members>Release_Team__c</members>
+       <members>Release_Governance_Settings__mdt</members>
+        <name>CustomObject</name>
+    </types>
+    <!-- ========================= -->
+    <!-- Custom Tabs -->
+    <!-- ========================= -->
+      <types>
+        <members>Approval_Request__c</members>
+        <members>Deployment_Audit__c</members>
+        <members>Deployment_Request__c</members>
+        <members>Deployment_Task__c</members>
+        <members>Release_Team__c</members>
+        <name>CustomTab</name>
+    </types>
+    <!-- ========================= -->
+    <!-- Record Types -->
+    <!-- ========================= -->
+    <types>
+        <members>Deployment_Request__c.Development_Release</members>
+        <members>Deployment_Request__c.Emergency_Release</members>
+        <members>Deployment_Request__c.Production_Release</members>
+        <name>RecordType</name>
+    </types>
+
+    <!-- ========================= -->
+    <!-- Permission Sets -->
+    <!-- ========================= -->
+    <types>
+        <members>Release_Governance_Admin</members>
+        <members>Release_Manager_PS</members>
+        <members>Release_User_PS</members>
+        <name>PermissionSet</name>
+    </types>
+
+    <!-- ========================= -->
+    <!-- Custom Labels -->
+    <!-- ========================= -->
+  
+    <types>
+        <members>*</members>
+    
+        <name>CustomLabels</name>
+    </types>
+       <!-- Custom Permissions -->
+<types>
+        <members>In_Progress_or_Complete_Deployment_Tasks_Override</members>
+        <name>CustomPermission</name>
+    </types>
+
+        <!-- ========================= -->
+        <!-- Report folder name -->
+        <types>
+    <members>ReleaseGovernanceAppReports</members>
+    <name>ReportFolder</name>
+</types>
+    <!-- Reports -->
+    
+    <!-- ========================= -->
+<types>
+        <members>ReleaseGovernanceAppReports/Approved_vs_Rejected_vs_Pending_soX</members>
+        <members>ReleaseGovernanceAppReports/Deployment_Audit_History_Iv7</members>
+        <members>ReleaseGovernanceAppReports/Deployment_Requests_orw</members>
+        <members>ReleaseGovernanceAppReports/Deployment_Tasks_by_Assigned_User_EIu</members>
+        <members>ReleaseGovernanceAppReports/Deployment_Tasks_by_Status_eGv</members>
+        <members>ReleaseGovernanceAppReports/Overdue_Deployment_Tasks_4zc</members>
+        <members>ReleaseGovernanceAppReports/QA_Tasks_Jwt</members>
+        <name>Report</name>
+    </types>
+    <!-- Dashboard folder name -->
+    <!-- ========================= -->
+    <types>
+        <members>ReleaseGovernanceDashboard</members>
+        <name>DashboardFolder</name>
+    </types>
+    <!-- Dashboards -->
+    
+    <!-- ========================= -->
+        <types>
+        <members>ReleaseGovernanceDashboard/RAuGrrQMGoIvfDwnbLIcvAVEaMQzQw</members>
+        <name>Dashboard</name>
+    </types>
+    <!-- ========================= -->
+    <!-- Flows -->
+    <!-- ========================= -->
+        <types>
+        <members>All_Validate_Deployment_Task_Completion</members>
+        <members>Assign_Team_Member_Round_Robin</members>
+        <members>Create_Deployment_Approval_Request</members>
+        <members>Created_Deployment_Task</members>
+        <members>Execute_Deployment</members>
+        <members>Process_Deployment_Approval_Decision</members>
+        <members>Send_Deployment_Notifications</members>
+        
+        <name>Flow</name>
+    </types>
+    <!-- ========================= -->
+    <!-- Roles -->
+    <!-- ========================= -->
+    <!--  <types>
+        <members>Developer</members>
+        <members>QA_Engineer</members>
+        <members>Release_Manager</members>
+        <name>Role</name>
+    </types> -->
+    <!-- ========================= -->
+    <!-- Validation Rules -->
+    <!-- ========================= -->
+        <types>
+        <members>Deployment_Request__c.Prevent_Submit_When_Tasks_Incomplete</members>
+        <members>Deployment_Request__c.Restrict_Status_By_Role</members>
+        <members>Deployment_Task__c.Only_Assigned_User_Can_Complete_Task</members>
+        <name>ValidationRule</name>
+    </types>
+    <!-- ========================= -->
+    <!-- Flexi Pages -->
+    <!-- ========================= -->
+        <types>
+        <members>Approval_Request_Record_Page</members>
+        <members>Deployment_Audit_Record_Page</members>
+        <members>Deployment_Request_Record_Page</members>
+        <members>Deployment_Task_Record_Page</members>
+        <members>Release_Governance_App_UtilityBar</members>
+        <members>Release_Governance_App_home</members>
+        <members>Release_Team_Record_Page</members>
+        <name>FlexiPage</name>
+    </types>
+
+        <!-- ========================= -->
+    <!-- Layouts -->
+    <!-- ========================= -->
+    <types>
+        <members>Deployment_Request__c-Deployment Request Layout</members>
+        <members>Deployment_Task__c-Deployment Task Layout</members>
+        <members>Approval_Request__c-Approval Request Layout</members>
+        <members>Deployment_Audit__c-Deployment Audit Layout</members>
+        <members>Release_Team__c-Release Team Layout</members>
+        <name>Layout</name>
+    </types>
+    <!-- ========================= -->
+    <!-- Global Value Sets -->
+    <!-- ========================= -->
+      <types>
+        <members>Action</members>
+        <members>Status</members>
+        <name>GlobalValueSet</name>
+    </types>
+    <!-- ========================= -->
+    <!-- content assets -->
+    <!-- ========================= -->
+    <types>
+        <members>VITLOGO</members>
+        <name>ContentAsset</name>
+    </types>
+    <!-- ========================= -->
+    <!-- Custom Metadata -->
+    <!-- ========================= -->
+       <types>
+    <members>Release_Governance_Settings.Default</members>
+    <name>CustomMetadata</name>
+</types>
+  
+    <!-- ========================= -->
+    <!-- Workflow Rules -->
+    <!-- ========================= -->
+    <!--   <types>
+        <members>Approval_Request__c</members>
+        <members>Deployment_Request__c</members>
+        <members>Deployment_Task__c</members>
+        <name>Workflow</name>
+    </types> -->
+    <!-- ========================= -->
+    <!-- Workflow Alerts -->        
+<!--<types>
+    <members>*</members>
+    <name>WorkflowAlert</name>
+</types> -->
+
+
+    <version>67.0</version>
+</Package>

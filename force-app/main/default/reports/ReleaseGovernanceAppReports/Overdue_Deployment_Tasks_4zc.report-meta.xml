@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>CHILD_NAME</field>
+    </columns>
+    <columns>
+        <field>Deployment_Task__c.Task_Type__c</field>
+    </columns>
+    <columns>
+        <field>Deployment_Task__c.Status__c</field>
+    </columns>
+    <columns>
+        <field>Deployment_Task__c.Due_Date__c</field>
+    </columns>
+    <columns>
+        <field>CUST_NAME</field>
+    </columns>
+    <columns>
+        <field>Deployment_Request__c.Environment__c</field>
+    </columns>
+    <columns>
+        <field>Deployment_Request__c.Requested_By__c</field>
+    </columns>
+    <description>Displays all Deployment Tasks whose Due Date has passed and whose Status is not Completed, enabling Release Managers to quickly identify delayed release activities.</description>
+    <filter>
+        <criteriaItems>
+            <column>Deployment_Task__c.Status__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Not Started,In Progress</value>
+        </criteriaItems>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Deployment_Task__c.Assigned_To__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Overdue Deployment Tasks</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CustomEntityCustomEntity$Deployment_Request__c$Deployment_Task__c</reportType>
+    <scope>user</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Deployment_Request__c.Deployment_Date__c</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

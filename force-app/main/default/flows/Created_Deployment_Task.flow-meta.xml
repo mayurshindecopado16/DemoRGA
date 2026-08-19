@@ -1,0 +1,529 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <description>This email alert assigned to user records.</description>
+        <name>Send_Notification_Deployment_Task_Creation_Deployment_Task_Assigned</name>
+        <label>Send Notification Deployment Task Creation Deployment Task Assigned</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>emailSimple</actionName>
+        <actionType>emailSimple</actionType>
+        <connector>
+            <targetReference>Get_Created_Deployment_Task_Records</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>recipientAddresses</name>
+            <value>
+                <collectionElements>
+                    <elementReference>Get_Created_Deployment_Task_Records.Assigned_To__r.Email</elementReference>
+                </collectionElements>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>composeEmailContent</name>
+            <value>
+                <stringValue>True</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailSubject</name>
+            <value>
+                <elementReference>subjectDeploymentTaskCreation</elementReference>
+                <inputConfiguratorMode>Resource</inputConfiguratorMode>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailBody</name>
+            <value>
+                <elementReference>DeploymentTaskAssignmentNotification</elementReference>
+                <inputConfiguratorMode>Resource</inputConfiguratorMode>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>sendRichBody</name>
+            <value>
+                <booleanValue>true</booleanValue>
+                <inputConfiguratorMode>Resource</inputConfiguratorMode>
+            </value>
+        </inputParameters>
+        <nameSegment>emailSimple</nameSegment>
+        <offset>0</offset>
+        <versionString>3.0.1</versionString>
+    </actionCalls>
+    <apiVersion>67.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <description>Creating Deployment Task.</description>
+        <name>Build_Deployment_Tasks</name>
+        <label>Build Deployment Tasks</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>varCodeReviewTask.Task_Type__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Code Review</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varCodeReviewTask.Deployment_Request__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varCodeReviewTask.Status__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Not Started</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varCodeReviewTask.Due_Date__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>codeReviewfrmDueDatePlus</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varUnitTestingTask.Task_Type__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Unit Testing</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varUnitTestingTask.Deployment_Request__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varQATestingTask.Status__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Not Started</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varUnitTestingTask.Due_Date__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>unitTestingfrmDueDatePlus</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varQATestingTask.Task_Type__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>QA Testing</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varQATestingTask.Deployment_Request__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varUnitTestingTask.Status__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Not Started</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varQATestingTask.Due_Date__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>qaTestingfrmDueDatePlus</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varApprovalReviewTask.Task_Type__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Approval</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varApprovalReviewTask.Deployment_Request__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varApprovalReviewTask.Status__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Not Started</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varApprovalReviewTask.Due_Date__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>approvalfrmDueDatePlus</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varProductionDeploymentTask.Task_Type__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Production Validation</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varProductionDeploymentTask.Deployment_Request__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varProductionDeploymentTask.Status__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Not Started</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varProductionDeploymentTask.Due_Date__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>productionfrmDueDatePlus</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varDeploymentTasks</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>varCodeReviewTask</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varDeploymentTasks</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>varUnitTestingTask</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varDeploymentTasks</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>varQATestingTask</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varDeploymentTasks</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>varApprovalReviewTask</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varDeploymentTasks</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>varProductionDeploymentTask</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Create_Deployment_Tasks</targetReference>
+        </connector>
+    </assignments>
+    <description>This flow used for All Deployment Task creation</description>
+    <environments>Default</environments>
+    <formulas>
+        <description>In this formula we use custom label for deployment task: Approval due date plus days.</description>
+        <name>approvalfrmDueDatePlus</name>
+        <dataType>Date</dataType>
+        <expression>{!$Flow.CurrentDate} +VALUE({!$Label.approvalfrmDueDatePlus})</expression>
+    </formulas>
+    <formulas>
+        <description>In this formula we use custom label for deployment task: Code Review due date plus days.</description>
+        <name>codeReviewfrmDueDatePlus</name>
+        <dataType>Date</dataType>
+        <expression>{!$Flow.CurrentDate} +VALUE({!$Label.codeReviewfrmDueDatePlus})</expression>
+    </formulas>
+    <formulas>
+        <description>In this formula we use custom label for deployment task: Production due date plus days.</description>
+        <name>productionfrmDueDatePlus</name>
+        <dataType>Date</dataType>
+        <expression>{!$Flow.CurrentDate} +VALUE({!$Label.productionfrmDueDatePlus})</expression>
+    </formulas>
+    <formulas>
+        <description>In this formula we use custom label for deployment task: QA Testing due date plus days.</description>
+        <name>qaTestingfrmDueDatePlus</name>
+        <dataType>Date</dataType>
+        <expression>{!$Flow.CurrentDate} +VALUE({!$Label.qaTestingfrmDueDatePlus})</expression>
+    </formulas>
+    <formulas>
+        <description>Deployment Task Assigned Send to Notification</description>
+        <name>subjectDeploymentTaskCreation</name>
+        <dataType>String</dataType>
+        <expression>&quot;Deployment Task - &quot; &amp;  {!Get_Created_Deployment_Task_Records.Name}</expression>
+    </formulas>
+    <formulas>
+        <description>In this formula we use custom label for deployment task: Unit Testing due date plus days.</description>
+        <name>unitTestingfrmDueDatePlus</name>
+        <dataType>Date</dataType>
+        <expression>{!$Flow.CurrentDate} +VALUE({!$Label.unitTestingfrmDueDatePlus})</expression>
+    </formulas>
+    <interviewLabel>Created Deployment Task {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Created Deployment Task</label>
+    <loops>
+        <description>Get all the Deployment Task records</description>
+        <name>Get_Created_Deployment_Task_Records</name>
+        <label>Get Created Deployment Task Records</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <collectionReference>Get_Created_Deployment_Tasks</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Send_Notification_Deployment_Task_Creation_Deployment_Task_Assigned</targetReference>
+        </nextValueConnector>
+    </loops>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <description>All records Deployment Task Create</description>
+        <name>Create_Deployment_Tasks</name>
+        <label>Create Deployment Tasks</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Get_Created_Deployment_Tasks</targetReference>
+        </connector>
+        <inputReference>varDeploymentTasks</inputReference>
+    </recordCreates>
+    <recordLookups>
+        <description>get Deployment Task.</description>
+        <name>Get_Created_Deployment_Tasks</name>
+        <label>Get Created Deployment Tasks</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Get_Created_Deployment_Task_Records</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Deployment_Request__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>Deployment_Task__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Assign_Code_Review_Developer_Role</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Status__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Draft</stringValue>
+            </value>
+        </filters>
+        <object>Deployment_Request__c</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <subflows>
+        <description>This is Release Manager role users assigning  for Approval Task</description>
+        <name>Assign_Approval_and_Release_Manager_Role</name>
+        <label>Assign Approval  and Release Manager Role</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Assign_Production_and_Release_Manager_Role</targetReference>
+        </connector>
+        <flowName>Assign_Team_Member_Round_Robin</flowName>
+        <inputAssignments>
+            <name>varRequiredRole</name>
+            <value>
+                <stringValue>Release Manager</stringValue>
+            </value>
+        </inputAssignments>
+        <outputAssignments>
+            <assignToReference>varApprovalReviewTask.Assigned_To__c</assignToReference>
+            <name>varAssignedUserId</name>
+        </outputAssignments>
+    </subflows>
+    <subflows>
+        <description>This is Developer role users assigning for Code Review Task</description>
+        <name>Assign_Code_Review_Developer_Role</name>
+        <label>Assign Code Review &amp; Developer Role</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Assign_Unit_test_Developer_Role</targetReference>
+        </connector>
+        <flowName>Assign_Team_Member_Round_Robin</flowName>
+        <inputAssignments>
+            <name>varRequiredRole</name>
+            <value>
+                <stringValue>Developer</stringValue>
+            </value>
+        </inputAssignments>
+        <outputAssignments>
+            <assignToReference>varCodeReviewTask.Assigned_To__c</assignToReference>
+            <name>varAssignedUserId</name>
+        </outputAssignments>
+    </subflows>
+    <subflows>
+        <description>This is Release Manager role users assigning  for Production Task</description>
+        <name>Assign_Production_and_Release_Manager_Role</name>
+        <label>Assign Production and Release Manager Role</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Build_Deployment_Tasks</targetReference>
+        </connector>
+        <flowName>Assign_Team_Member_Round_Robin</flowName>
+        <inputAssignments>
+            <name>varRequiredRole</name>
+            <value>
+                <stringValue>Release Manager</stringValue>
+            </value>
+        </inputAssignments>
+        <outputAssignments>
+            <assignToReference>varProductionDeploymentTask.Assigned_To__c</assignToReference>
+            <name>varAssignedUserId</name>
+        </outputAssignments>
+    </subflows>
+    <subflows>
+        <description>This is QA Engineer role users assigning  for QA Testing Task</description>
+        <name>Assign_QA_Testing_and_QA_Engineer_Role</name>
+        <label>Assign QA Testing and QA Engineer Role</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Assign_Approval_and_Release_Manager_Role</targetReference>
+        </connector>
+        <flowName>Assign_Team_Member_Round_Robin</flowName>
+        <inputAssignments>
+            <name>varRequiredRole</name>
+            <value>
+                <stringValue>QA Engineer</stringValue>
+            </value>
+        </inputAssignments>
+        <outputAssignments>
+            <assignToReference>varQATestingTask.Assigned_To__c</assignToReference>
+            <name>varAssignedUserId</name>
+        </outputAssignments>
+    </subflows>
+    <subflows>
+        <description>This is Developer role users assigning  for Unit Test Task</description>
+        <name>Assign_Unit_test_Developer_Role</name>
+        <label>Assign Unit test &amp; Developer Role</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Assign_QA_Testing_and_QA_Engineer_Role</targetReference>
+        </connector>
+        <flowName>Assign_Team_Member_Round_Robin</flowName>
+        <inputAssignments>
+            <name>varRequiredRole</name>
+            <value>
+                <stringValue>Developer</stringValue>
+            </value>
+        </inputAssignments>
+        <outputAssignments>
+            <assignToReference>varUnitTestingTask.Assigned_To__c</assignToReference>
+            <name>varAssignedUserId</name>
+        </outputAssignments>
+    </subflows>
+    <textTemplates>
+        <description>Deployment Task Assigned Send to Notification</description>
+        <name>DeploymentTaskAssignmentNotification</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p&gt;Hello,&lt;/p&gt;&lt;p&gt;A New Deployment Task has been assigned to you.&lt;/p&gt;&lt;p&gt;Task Type: {!Get_Created_Deployment_Task_Records.Task_Type__c}&lt;/p&gt;&lt;p&gt;Deployment Request: {!Get_Created_Deployment_Task_Records.Deployment_Request__r.Name}&lt;/p&gt;&lt;p&gt;Status: {!Get_Created_Deployment_Task_Records.Status__c}&lt;/p&gt;&lt;p&gt;Due Date: {!Get_Created_Deployment_Task_Records.Due_Date__c}&lt;/p&gt;&lt;p&gt;Please review and complete your task before the due date.&lt;/p&gt;&lt;p&gt;Thank you,&lt;/p&gt;&lt;p&gt;Release Governance App&lt;/p&gt;</text>
+    </textTemplates>
+    <variables>
+        <description>This collection will hold Approval Review Deployment Task records.</description>
+        <name>varApprovalReviewTask</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Deployment_Task__c</objectType>
+    </variables>
+    <variables>
+        <description>This collection will hold Code Review Deployment Task records.</description>
+        <name>varCodeReviewTask</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Deployment_Task__c</objectType>
+    </variables>
+    <variables>
+        <description>This collection will hold all five Deployment Task records.</description>
+        <name>varDeploymentTasks</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Deployment_Task__c</objectType>
+    </variables>
+    <variables>
+        <description>This collection will hold Production Deployment Task records.</description>
+        <name>varProductionDeploymentTask</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Deployment_Task__c</objectType>
+    </variables>
+    <variables>
+        <description>This collection will hold QA Testing  Deployment Task records.</description>
+        <name>varQATestingTask</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Deployment_Task__c</objectType>
+    </variables>
+    <variables>
+        <description>This collection will hold Unit Testing Deployment Task records.</description>
+        <name>varUnitTestingTask</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Deployment_Task__c</objectType>
+    </variables>
+</Flow>

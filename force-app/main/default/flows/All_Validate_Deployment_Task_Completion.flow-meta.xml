@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>67.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <description>This will Increase count.</description>
+        <name>Increase_Incomplete_Counter</name>
+        <label>Increase Incomplete Counter</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>varIncompleteCount</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <numberValue>1.0</numberValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Loop_Through_Deployment_Tasks</targetReference>
+        </connector>
+    </assignments>
+    <decisions>
+        <description>To check all task complete.</description>
+        <name>All_Tasks_Completed</name>
+        <label>All Tasks Completed?</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Mark_Deployment_Not_Ready</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No</defaultConnectorLabel>
+        <rules>
+            <name>Yes</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>varIncompleteCount</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <numberValue>0.0</numberValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Mark_Deployment_Ready</targetReference>
+            </connector>
+            <label>Yes</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>This will check Deployment Task is complete or not.</description>
+        <name>Is_Task_Completed</name>
+        <label>Is Task Completed?</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Loop_Through_Deployment_Tasks</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Incomplete</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Loop_Through_Deployment_Tasks.Status__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Completed</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Increase_Incomplete_Counter</targetReference>
+            </connector>
+            <label>Incomplete</label>
+        </rules>
+    </decisions>
+    <description>Whenever a Deployment Task is updated, check whether all related Deployment Tasks for the same Deployment Request are complete.</description>
+    <environments>Default</environments>
+    <interviewLabel>All Validate Deployment Task Completion {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>All Validate Deployment Task Completion</label>
+    <loops>
+        <description>Loop through all Deployment Tasks related to the Deployment Request.</description>
+        <name>Loop_Through_Deployment_Tasks</name>
+        <label>Loop Through Deployment Tasks</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <collectionReference>Get_Deployment_Task</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Is_Task_Completed</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>All_Tasks_Completed</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <description>get the Deployment Task</description>
+        <name>Get_Deployment_Task</name>
+        <label>Get Deployment Task</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Loop_Through_Deployment_Tasks</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Deployment_Request__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Deployment_Request__c</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>Deployment_Task__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <description>Disable VR Status Automation Bypass check false.</description>
+        <name>Disable_VR_Status_Automation_Bypass</name>
+        <label>Disable VR Status Automation Bypass</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Deployment_Request__c</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>VR_Status_Automation_Bypass__c</field>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </inputAssignments>
+        <object>Deployment_Request__c</object>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Mark Deployment Not Ready</description>
+        <name>Mark_Deployment_Not_Ready</name>
+        <label>Mark Deployment Not Ready</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Deployment_Request__c</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>All_Tasks_Completed__c</field>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </inputAssignments>
+        <object>Deployment_Request__c</object>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Mark Deployment Ready</description>
+        <name>Mark_Deployment_Ready</name>
+        <label>Mark Deployment Ready</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Disable_VR_Status_Automation_Bypass</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Deployment_Request__c</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>All_Tasks_Completed__c</field>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status__c</field>
+            <value>
+                <stringValue>Submitted</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>VR_Status_Automation_Bypass__c</field>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputAssignments>
+        <object>Deployment_Request__c</object>
+    </recordUpdates>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Get_Deployment_Task</targetReference>
+        </connector>
+        <object>Deployment_Task__c</object>
+        <recordTriggerType>Update</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <variables>
+        <description>This Incomplete Count Variable.</description>
+        <name>varIncompleteCount</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <scale>0</scale>
+        <value>
+            <numberValue>0.0</numberValue>
+        </value>
+    </variables>
+</Flow>

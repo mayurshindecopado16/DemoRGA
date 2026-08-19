@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Deployment_Request__c</fullName>
+    <description>This field used for Approval Request.</description>
+    <label>Deployment Request</label>
+    <referenceTo>Deployment_Request__c</referenceTo>
+    <relationshipLabel>Approval Requests</relationshipLabel>
+    <relationshipName>Approval_Requests</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Only_Assigned_User_Can_Complete_Task</fullName>
+    <active>true</active>
+    <description>Other than Assigned user update the status field getting and error.</description>
+    <errorConditionFormula>AND(
+
+ISCHANGED(Status__c),
+
+OR(ISPICKVAL(Status__c,&quot;Not Started&quot;),ISPICKVAL(Status__c,&quot;In Progress&quot;),ISPICKVAL(Status__c,&quot;Completed&quot;)) ,
+
+Assigned_To__c &lt;&gt; $User.Id,
+
+NOT( $Permission.In_Progress_or_Complete_Deployment_Tasks_Override ) 
+
+)</errorConditionFormula>
+    <errorMessage>Only the assigned user can mark this Deployment Task as Completed.</errorMessage>
+</ValidationRule>

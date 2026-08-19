@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomPermission xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>use a Custom Permission instead of hardcoding the Release Manager or higher user role in the Validation Rule</description>
+    <isLicensed>false</isLicensed>
+    <label>In Progress or Complete Deployment Tasks Override</label>
+</CustomPermission>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>approvalfrmDueDatePlus</fullName>
+        <categories>This label used for DT Approval</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>approvalfrmDueDatePlus</shortDescription>
+        <value>4</value>
+    </labels>
+    <labels>
+        <fullName>codeReviewfrmDueDatePlus</fullName>
+        <categories>This label used for DT Code Review</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>codeReviewfrmDueDatePlus</shortDescription>
+        <value>1</value>
+    </labels>
+    <labels>
+        <fullName>productionfrmDueDatePlus</fullName>
+        <categories>This label used for DT Production</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>productionfrmDueDatePlus</shortDescription>
+        <value>5</value>
+    </labels>
+    <labels>
+        <fullName>qaTestingfrmDueDatePlus</fullName>
+        <categories>This label used for DT QA Testing</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>qaTestingfrmDueDatePlus</shortDescription>
+        <value>3</value>
+    </labels>
+    <labels>
+        <fullName>unitTestingfrmDueDatePlus</fullName>
+        <categories>This label used for DT Unit Testing</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>unitTestingfrmDueDatePlus</shortDescription>
+        <value>2</value>
+    </labels>
+</CustomLabels>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Restrict_Status_By_Role</fullName>
+    <active>true</active>
+    <description>Restrict Deployment Status changes based on user role.</description>
+    <errorConditionFormula>AND(
+NOT( VR_Status_Automation_Bypass__c ),
+$Profile.Name &lt;&gt; &quot;System Administrator&quot;,
+ISCHANGED(Status__c),
+
+
+OR(
+
+/* Developer restrictions */
+AND(
+$UserRole.Name = &quot;Developer&quot;,
+OR(
+ISPICKVAL(Status__c,&quot;Approved&quot;),
+ISPICKVAL(Status__c,&quot;Rejected&quot;)
+)
+),
+
+/* QA restrictions */
+AND(
+$UserRole.Name = &quot;QA Engineer&quot;,
+OR(
+
+ISPICKVAL(Status__c,&quot;Approved&quot;),
+ISPICKVAL(Status__c,&quot;Rejected&quot;)
+
+)
+),
+
+/* Release Manager restrictions */
+AND(
+$UserRole.Name = &quot;Release Manager&quot;,
+OR(
+ISPICKVAL(Status__c,&quot;Draft&quot;),
+ISPICKVAL(Status__c,&quot;Submitted&quot;)
+
+)
+)
+
+)
+
+)</errorConditionFormula>
+    <errorMessage>You are not authorized to select this Deployment Status.</errorMessage>
+</ValidationRule>
